@@ -1,14 +1,20 @@
-var { authorUtils, pathUtils, updateJSON } = require('./lib');
-var { checkManagers, checkPath } = pathUtils;
-var { getAuthorInfo } = authorUtils;
+var {
+  getAuthorInfo,
+  checkManagers,
+  checkPath,
+  updateJSON,
+  addDeps,
+  updateJSON
+} = require('./lib');
+
 var util = require('./util');
 
 module.exports = {
-  authorUtils,
+  getAuthorInfo,
   checkManagers,
   checkPath,
-  getAuthorInfo,
-  pathUtils,
   updateJSON,
-  util
+  addDeps,
+  updateJSON,
+  util  
 };

@@ -22,6 +22,7 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^7.0.0",
     "nyc": "^15.0.0",
+    "semver": "^7.1.1",
     "tmp-promise": "^2.0.2"
   },
   "dependencies": {

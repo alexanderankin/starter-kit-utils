@@ -2,8 +2,7 @@ var { expect } = require('chai');
 var path = require('path');
 var tmp = require('tmp-promise');
 
-var { pathUtils, util } = require('..');
-var { checkManagers, checkPath } = pathUtils;
+var { checkManagers, checkPath, util } = require('..');
 var { unlink, writeFile } = util;
 
 // Create File

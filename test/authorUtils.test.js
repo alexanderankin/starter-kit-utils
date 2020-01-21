@@ -3,13 +3,12 @@ var path = require('path');
 var os = require('os');
 var tmp = require('tmp-promise');
 
-var { authorUtils, util } = require('..');
-var { getAuthorInfo } = authorUtils;
+var { getAuthorInfo, util } = require('..');
 var { copyFile, exists, readFile, unlink, writeFile } = util;
 
 var fixture = path.join.bind(path, __dirname, 'fixtures');
 
-describe('authorUtils', () => {
+describe('getAuthorInfo', () => {
   var local, oldLocal = null;
   var global, oldGlobal = null;
 

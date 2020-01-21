@@ -12,6 +12,12 @@ var read = async name => JSON.parse(await readFile(name, 'utf8'));
 var write = async (name, o) =>
   await writeFile(name, JSON.stringify(o), 'utf8');
 
+var { valid } = require('semver');
+
+// describe('getDeps', () => {
+//   var deps = 
+// });
+
 describe('updateJSON', () => {
   var dir, dirFile;
 
