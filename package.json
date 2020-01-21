@@ -23,5 +23,9 @@
     "nyc": "^15.0.0",
     "tmp-promise": "^2.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "git-config-path": "^2.0.0",
+    "github-username": "^5.0.1",
+    "parse-git-config": "^3.0.0"
+  }
 }

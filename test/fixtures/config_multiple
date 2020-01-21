@@ -1,0 +1,17 @@
+[core]
+  repositoryformatversion = 0
+  filemode = true
+  bare = false
+  logallrefupdates = true
+
+[remote "origin"]
+  url = git@github.com:username/origin
+  fetch = +refs/heads/*:refs/remotes/origin/*
+
+[remote "other"]
+  url = git@github.com:username/other
+  fetch = +refs/heads/*:refs/remotes/origin/*
+
+[remote "third"]
+  url = git@github.com:username/third
+  fetch = +refs/heads/*:refs/remotes/origin/*

@@ -1,5 +1,14 @@
 var fs = require('fs');
 
+async function copyFile(...args) {
+  return new Promise((res, rej) => {
+    fs.copyFile(...args, (err, data) => {
+      if (err) rej(err);
+      else res(data);
+    });
+  });
+}
+
 async function readdir(path) {
   return new Promise((res, rej) => {
     fs.readdir(path, (err, data) => {
@@ -9,14 +18,14 @@ async function readdir(path) {
   });
 }
 
-// async function readFile(...args) {
-//   return new Promise((res, rej) => {
-//     fs.readFile(...args, (err, data) => {
-//       if (err) rej(err);
-//       else res(data);
-//     });
-//   });
-// }
+async function readFile(...args) {
+  return new Promise((res, rej) => {
+    fs.readFile(...args, (err, data) => {
+      if (err) rej(err);
+      else res(data);
+    });
+  });
+}
 
 async function writeFile(...args) {
   return new Promise((res, rej) => {
@@ -36,6 +45,14 @@ async function unlink(...args) {
   });
 }
 
+async function exists(file) {
+  return new Promise((res) => {
+    fs.access(file, fs.constants.F_OK, err => {
+      res(!err);
+    });
+  });
+}
+
 module.exports = {
-  readdir, /*readFile,*/ writeFile, unlink
+  copyFile, readdir, readFile, writeFile, unlink, exists
 };
