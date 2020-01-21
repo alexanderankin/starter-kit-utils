@@ -28,9 +28,29 @@ This function will check if any of the files in the directories in the environme
 
 It takes no arguments, and returns an object with two properties: `{ yarn: Boolean, npm: Boolean }`.
 
+Example:
+
+```
+var { checkManagers } = require('starter-kit-utils');
+checkManagers().then(console.log.bind(console));
+// { npm: '/usr/local/bin/npm', yarn: '/home/toor/.yarn/bin/yarn' }
+```
+
 ### `getAuthorInfo`
 
 This function will try to find remotes in the local git configuration and user's name and email from the global configuration. This populates the author and repository fields.
+
+Example:
+
+```
+var { getAuthorInfo } = require('starter-kit-utils');
+getAuthorInfo().then(console.log.bind(console));
+// { author: 'David Ankin <daveankin@gmail.com>' }
+```
+
+### `updateJSON`
+
+This is the equivalent of doing something like `Object.assign({}, { new: data });` but on a physical file. This function takes first argument the file path, and the rest of the arguments are passed to `Object#assign`.
 
 ### Utility Functions
 
