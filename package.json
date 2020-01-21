@@ -1,0 +1,27 @@
+{
+  "name": "starter-kit-utils",
+  "version": "0.0.1",
+  "description": "Simpler API + 1 dependency for common create- prompt q's",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "start-kit",
+    "create"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexanderankin/starter-kit-utils.git"
+  },
+  "author": "Dave Ankin<daveankin@gmail.com>",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.0.0",
+    "tmp-promise": "^2.0.2"
+  },
+  "dependencies": {
+    "which": "^2.0.2"
+  }
+}
