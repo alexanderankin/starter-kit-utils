@@ -9,14 +9,14 @@ async function readdir(path) {
   });
 }
 
-async function readFile(...args) {
-  return new Promise((res, rej) => {
-    fs.readFile(...args, (err, data) => {
-      if (err) rej(err);
-      else res(data);
-    });
-  });
-}
+// async function readFile(...args) {
+//   return new Promise((res, rej) => {
+//     fs.readFile(...args, (err, data) => {
+//       if (err) rej(err);
+//       else res(data);
+//     });
+//   });
+// }
 
 async function writeFile(...args) {
   return new Promise((res, rej) => {
@@ -37,5 +37,5 @@ async function unlink(...args) {
 }
 
 module.exports = {
-  readdir, readFile, writeFile, unlink
+  readdir, /*readFile,*/ writeFile, unlink
 };

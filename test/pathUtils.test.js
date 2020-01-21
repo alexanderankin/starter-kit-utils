@@ -3,7 +3,7 @@ var path = require('path');
 var tmp = require('tmp-promise');
 
 var { pathUtils, util } = require('..');
-var { checkPackageManagers, checkPath } = pathUtils;
+var { checkManagers, checkPath } = pathUtils;
 var { unlink, writeFile } = util;
 
 // Create File
@@ -24,35 +24,35 @@ describe('has yarn npm', () => {
   it('should find npm, yarn', async () => {
     var p = path.join.bind(path, dir.path);
 
-    var result = await checkPackageManagers('npm');
+    var result = await checkManagers();
     expect(result).to.eql({ npm: false, yarn: false });
     await cF(dir.path, 'npm');
 
-    result = await checkPackageManagers('npm');
+    result = await checkManagers();
     expect(result).to.eql({ npm: p('npm'), yarn: false });
 
-    result = await checkPackageManagers('yarn');
+    result = await checkManagers();
     expect(result).to.eql({ npm: p('npm'), yarn: false });
     await cF(dir.path, 'yarn');
 
-    result = await checkPackageManagers('yarn');
+    result = await checkManagers();
     expect(result).to.eql({ npm: p('npm'), yarn: p('yarn') });
 
     await un(dir.path, 'npm');
     await un(dir.path, 'yarn');
 
-    result = await checkPackageManagers('npm');
+    result = await checkManagers();
     expect(result).to.eql({ npm: false, yarn: false });
     await cF(dir.path, 'npm.exe');
 
-    result = await checkPackageManagers('npm');
+    result = await checkManagers();
     expect(result).to.eql({ npm: p('npm.exe'), yarn: false });
 
-    result = await checkPackageManagers('yarn');
+    result = await checkManagers();
     expect(result).to.eql({ npm: p('npm.exe'), yarn: false });
     await cF(dir.path, 'yarn.exe');
 
-    result = await checkPackageManagers('yarn');
+    result = await checkManagers();
     expect(result).to.eql({ npm: p('npm.exe'), yarn: p('yarn.exe') });
   });
 });
