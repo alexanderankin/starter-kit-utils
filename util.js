@@ -27,6 +27,15 @@ async function writeFile(...args) {
   });
 }
 
+async function unlink(...args) {
+  return new Promise((res, rej) => {
+    fs.unlink(...args, (err, data) => {
+      if (err) rej(err);
+      else res(data);
+    });
+  });
+}
+
 module.exports = {
-  readdir, readFile, writeFile
+  readdir, readFile, writeFile, unlink
 };
