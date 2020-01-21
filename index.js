@@ -1,6 +1,6 @@
-var checkPath = require('./lib/checkPath');
+var pathUtils = require('./lib/pathUtils');
 var util = require('./util');
 
 module.exports = {
-  checkPath, util
+  pathUtils, util
 };

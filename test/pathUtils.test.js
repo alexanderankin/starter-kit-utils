@@ -2,8 +2,8 @@ var { expect } = require('chai');
 var path = require('path');
 var tmp = require('tmp-promise');
 
-var { checkPath, util } = require('..');
-
+var { pathUtils, util } = require('..');
+var { checkPath } = pathUtils;
 
 describe('checkPath', () => {
   var oldEnvPath;

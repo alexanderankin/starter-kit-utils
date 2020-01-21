@@ -21,7 +21,5 @@
     "mocha": "^7.0.0",
     "tmp-promise": "^2.0.2"
   },
-  "dependencies": {
-    "which": "^2.0.2"
-  }
+  "dependencies": {}
 }
