@@ -52,6 +52,61 @@ getAuthorInfo().then(console.log.bind(console));
 
 This is the equivalent of doing something like `Object.assign({}, { new: data });` but on a physical file. This function takes first argument the file path, and the rest of the arguments are passed to `Object#assign`.
 
+Example:
+
+```
+$ echo '{"a":5}' > file.json
+$ node
+> var { updateJSON } = require('starter-kit-utils');
+> JSON.parse(fs.readFileSync('file.json', 'utf8'));
+// { a: 5 }
+> updateJSON('file.json', { a: undefined, b: 5, c: [ 5 ]})
+.then(console.log.bind(console));
+// { a: undefined, b: 5, c: [ 5 ] }
+$ cat file.json
+// {b:5,c:[5]}
+```
+
+### `addDeps`
+
+This function will take the dependencies in the `getDeps` format and put them into a manifest, taking arguments, object, deps, dev or not
+
+Example:
+
+```
+var { addDeps } = require('starter-kit-utils');
+var a = {};
+addDeps(a, [ { name: 'dotenv', version: '1.0.0' } ], true);
+console.log(a); // { devDpendencies: { dotenv: '1.0.0' } }
+
+a = {};
+addDeps(a, [ { name: 'dotenv', version: '1.0.0' } ]);
+console.log(a); // { dependencies: { dotenv: '1.0.0' } }
+```
+
+### `getDeps`
+
+This function will actually query the npm repository via `pacote`, as follows:
+
+```
+async function getDeps(deps) {
+  return await Promise.all(deps.map(async dep => {
+    return {
+      name: dep,
+      version: (await pacote.manifest(dep)).version
+    };
+  }));
+}
+```
+
+For example:
+```
+var { getDeps } = require('starter-kit-utils');
+getDeps(['dotenv', 'express']).then(console.log.bind(console));
+// [ { name: 'dotenv', version: '8.2.0' },
+//   { name: 'express', version: '4.17.1' } ]
+```
+
 ### Utility Functions
 
 Example:

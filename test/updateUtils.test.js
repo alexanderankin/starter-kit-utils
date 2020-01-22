@@ -4,7 +4,7 @@ var tmp = require('tmp-promise');
 
 require('chai').use(require('chai-as-promised'))
 
-var { updateJSON, util } = require('..');
+var { addDeps, getDeps, updateJSON, util } = require('..');
 var { unlink, readFile, writeFile } = util;
 
 var fixture = path.join.bind(path, __dirname, 'fixtures');
@@ -12,11 +12,46 @@ var read = async name => JSON.parse(await readFile(name, 'utf8'));
 var write = async (name, o) =>
   await writeFile(name, JSON.stringify(o), 'utf8');
 
+var sinon = require('sinon');
 var { valid } = require('semver');
 
-// describe('getDeps', () => {
-//   var deps = 
-// });
+describe('addDeps', () => {
+  it('should add deps and devDeps', () => {
+    var deps = [{name:'a', version:'0.0.1'}, {name:'b', version:'1.0.1'}];
+    expect(addDeps({}, deps, false)).to.eql({
+      dependencies: { a: '0.0.1', b: '1.0.1' }
+    });
+
+    expect(addDeps({}, deps, true)).to.eql({
+      devDependencies: { a: '0.0.1', b: '1.0.1' }
+    });
+  });  
+});
+
+describe('getDeps', () => {
+  var sandbox;
+
+  before(() => {
+    sandbox = sinon.createSandbox();
+    var pacote = require('pacote');
+    sandbox.stub(pacote, 'manifest');
+    pacote.manifest.returns({ version: '0.0.1' });
+  });
+
+  after(() => sandbox.restore());
+
+  it('should fetch versions', async () => {
+    var deps = [ 'dotenv' ];
+    var versions = await getDeps(deps);
+
+    expect(versions).to.have.length(1);
+    expect(versions[0]).to.have.property('name');
+    expect(versions[0].name).to.equal('dotenv');
+    expect(versions[0]).to.have.property('version');
+    expect(versions[0].version).to.equal('0.0.1');
+    expect(valid(versions[0].version)).to.be.ok;
+  });
+});
 
 describe('updateJSON', () => {
   var dir, dirFile;

@@ -4,6 +4,7 @@ var {
   checkPath,
   updateJSON,
   addDeps,
+  getDeps,
   updateJSON
 } = require('./lib');
 
@@ -15,6 +16,7 @@ module.exports = {
   checkPath,
   updateJSON,
   addDeps,
+  getDeps,
   updateJSON,
   util  
 };
