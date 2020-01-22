@@ -3,6 +3,10 @@
 Simpler API and only one dependency for common create- style packages and
 starter kits' prompt q's.
 
+In the future, it may also provide some utility functions regarding
+rendering a folder structure full of templates. Maybe even a CLI for testing
+that stuff.
+
 ## Documentation
 
 ### `checkPath`

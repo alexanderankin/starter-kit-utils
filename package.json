@@ -4,7 +4,7 @@
   "description": "Simpler API + 1 dependency for common create- prompt q's",
   "main": "index.js",
   "scripts": {
-    "coverage": "nyc mocha",
+    "coverage": "nyc --all mocha",
     "test": "mocha"
   },
   "keywords": [
