@@ -18,7 +18,7 @@ describe('has yarn npm', () => {
     process.env.PATH = dir.path;
   });
 
-  after(async () => { await dir.cleanup(); process.env.PATH = oldEnvPath });
+  after(async () => { await dir.cleanup(); process.env.PATH = oldEnvPath; });
 
   it('should find npm, yarn', async () => {
     var p = path.join.bind(path, dir.path);

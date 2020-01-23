@@ -27,6 +27,7 @@
     "tmp-promise": "^2.0.2"
   },
   "dependencies": {
+    "ejs": "^3.0.1",
     "git-config-path": "^2.0.0",
     "github-username": "^5.0.1",
     "pacote": "^10.3.0",

@@ -53,6 +53,15 @@ async function exists(file) {
   });
 }
 
+async function stat(...args) {
+  return new Promise((res, rej) => {
+    fs.stat(...args, (err, data) => {
+      if (err) rej(err);
+      else res(data);
+    });
+  });
+}
+
 module.exports = {
-  copyFile, readdir, readFile, writeFile, unlink, exists
+  copyFile, readdir, readFile, writeFile, unlink, exists, stat
 };

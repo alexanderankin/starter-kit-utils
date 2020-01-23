@@ -5,7 +5,8 @@ var {
   updateJSON,
   addDeps,
   getDeps,
-  updateJSON
+  updateJSON,
+  renderFolder
 } = require('./lib');
 
 var util = require('./util');
@@ -18,5 +19,6 @@ module.exports = {
   addDeps,
   getDeps,
   updateJSON,
-  util  
+  renderFolder,
+  util
 };
