@@ -4,7 +4,7 @@ var tmp = require('tmp-promise');
 var path = require('path');
 var os = require('os');
 
-var { generateCopyList, generateCopyListRecursive } = require('../lib/renderFolder');
+var { generateCopyList, generateCopyListRecursive, renderFile } = require('../lib/renderFolder');
 var { renderFolder, util } = require('..');
 var { copyFile, exists, readFile, unlink, writeFile } = util;
 
@@ -14,16 +14,40 @@ describe('renderFolder', () => {
   describe.skip('errors'); // is this project rly mature enough for this test?
 
   describe('does it render folders', () => {
-    var dir;
+    var dir, direntry;
 
     before(async () => {
       dir = await tmp.dir({ unsafeCleanup: true });
+      direntry = path.join.bind(path, dir.path);
       // await renderFolder
     });
 
     after(async () => await dir.cleanup());
 
-    it.skip('should run');
+    it('should render a single file', async () => {
+      var locals = { project: { camelName: 'myProject' } };
+      await renderFile(fixture('README.md.ejs'), direntry('README.md'), locals);
+      
+      var should = await readFile(fixture('README.md'), 'utf8');
+      var output = await readFile(direntry('README.md'), 'utf8');
+
+      expect(output).to.equal(should);
+    });
+
+    it('should render a folder', async () => {
+      var locals = { a: 1, b: 'ok', c: null };
+      await renderFolder(fixture('template1'), direntry('src'), locals);
+
+      expect(await readFile(direntry('src', 'a'), 'utf8')).to.equal('1');
+      expect(await readFile(direntry('src', 'b'), 'utf8')).to.equal('ok');
+      expect(await readFile(direntry('src', 'c'), 'utf8')).to.equal('');
+      expect(await readFile(direntry('src', 'd', 'e'), 'utf8')).to.equal('1');
+      expect(await readFile(direntry('src', 'd', 'f'), 'utf8')).to.equal('ok');
+      expect(await readFile(direntry('src', 'd', 'g'), 'utf8')).to.equal('');
+      expect(await readFile(direntry('src', 'h', 'i'), 'utf8')).to.equal('1');
+      expect(await readFile(direntry('src', 'h', 'j'), 'utf8')).to.equal('ok');
+      expect(await readFile(direntry('src', 'h', 'k'), 'utf8')).to.equal('');
+    });
   });
 
   describe('helper functions', () => {
